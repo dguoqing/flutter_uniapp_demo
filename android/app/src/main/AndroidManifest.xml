@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_uniapp_demo">
+    package="com.example.fultter_uniapp_demo_dgq">
    <application
         android:label="flutter_uniapp_demo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+            android:name=".FlutterUniappPlugin"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

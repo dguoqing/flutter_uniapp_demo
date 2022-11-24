@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,25 +43,13 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  static var flutterUni = const MethodChannel("flutter_uni_dongguoqing");
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -95,21 +84,45 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            MaterialButton(
+              onPressed: () {
+                _callUniInit();
+              },
+              child: const Text("初始化"),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const SizedBox(
+              height: 16,
+            ),
+            MaterialButton(
+              onPressed: () {
+                _callOpenUniApp();
+              },
+              child: const Text("打开小程序"),
+            ),
+            MaterialButton(
+              onPressed: () {
+                _callConsole();
+              },
+              child: const Text("测试与原生通信"),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  _callUniInit() {
+    print("callUniInit\n");
+    MyHomePage.flutterUni.invokeMethod("init");
+  }
+
+  _callOpenUniApp() {
+    print("callOpenUniApp\n");
+    MyHomePage.flutterUni.invokeMethod("open");
+  }
+
+  _callConsole() {
+    print("_callConsole\n");
+    MyHomePage.flutterUni.invokeMethod("console");
   }
 }
