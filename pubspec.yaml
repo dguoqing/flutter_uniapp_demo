@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.5
   bruno: ^3.2.0
+  dio: ^5.1.2
 
 dev_dependencies:
   flutter_test:
